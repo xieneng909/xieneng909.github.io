@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+人总以为得到越多，就会越快乐。
+
+其实感觉真的得到多了，你并不会因此更快乐。
+
+相反，得到的越少，越纯粹，内心的快乐更多。
+
+因为人是一种习惯享受简单的生物。
+
+自古都是这样。
+
+今天想讲下旅游。
+
+感觉现代人的旅游很累，做攻略、买这个买那个、拎着大包小包、扛着长枪短炮，开始所谓的旅游。其实很累。
+
+旅行本来就是心的放飞。外物的累赘越多，越得不到旅行本身带来的种种美包括：
+1）旅途不确定带来的探索美，让你感恩遇到的每个出乎你预料的细节；
+2）想走就走，想停就停。当遇到心动的时分，停下来，让心情沉淀，听听内心的声音；
+3）由于极少的外物带来的限定，你可以真正的放松下来，告别ipad,电脑等等。
+
+人类的进化从地球史来说只是一瞬间，我们人类不是进化的太慢而是太快了，所以有时间请放慢你的脚步。
+
+建议：
+1）除签证、订机票和必须的饭店外，不做功课，享受惊喜和随遇而安；
+2）只背一个书包，放上必须的衣物、kindle和一部联系手机；
+3）说走就走，记住享受当下，快乐难得。
+
+说了这么多，享受吧。
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>人总以为得到越多，就会越快乐。</p>
+
+<p>其实感觉真的得到多了，你并不会因此更快乐。</p>
+
+<p>相反，得到的越少，越纯粹，内心的快乐更多。</p>
+
+<p>因为人是一种习惯享受简单的生物。</p>
+
+<p>自古都是这样。</p>
+
+<p>今天想讲下旅游。</p>
+
+<p>感觉现代人的旅游很累，做攻略、买这个买那个、拎着大包小包、扛着长枪短炮，开始所谓的旅游。其实很累。</p>
+
+<p>旅行本来就是心的放飞。外物的累赘越多，越得不到旅行本身带来的种种美包括：
+1）旅途不确定带来的探索美，让你感恩遇到的每个出乎你预料的细节；
+2）想走就走，想停就停。当遇到心动的时分，停下来，让心情沉淀，听听内心的声音；
+3）由于极少的外物带来的限定，你可以真正的放松下来，告别ipad,电脑等等。</p>
+
+<p>人类的进化从地球史来说只是一瞬间，我们人类不是进化的太慢而是太快了，所以有时间请放慢你的脚步。</p>
+
+<p>建议：
+1）除签证、订机票和必须的饭店外，不做功课，享受惊喜和随遇而安；
+2）只背一个书包，放上必须的衣物、kindle和一部联系手机；
+3）说走就走，记住享受当下，快乐难得。</p>
+
+<p>说了这么多，享受吧。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "simple_journey.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
