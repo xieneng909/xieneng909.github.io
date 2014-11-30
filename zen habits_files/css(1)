@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Sorts Mill Goudy';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sorts Mill Goudy Regular'), local('SortsMillGoudy-Regular'), url(http://fonts.gstatic.com/s/sortsmillgoudy/v6/JzRrPKdwEnE8F1TDmDLMUkQF8YaxoHnTBii2CPCdpvk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Sorts Mill Goudy';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Sorts Mill Goudy Italic'), local('SortsMillGoudy-Italic'), url(http://fonts.gstatic.com/s/sortsmillgoudy/v6/UUu1lKiy4hRmBWk599VL1b2c95eZKbds6ayw__-73Og.woff) format('woff');
+}
